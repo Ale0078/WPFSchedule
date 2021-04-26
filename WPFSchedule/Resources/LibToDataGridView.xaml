@@ -77,4 +77,27 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="borderToColumns">
+        <Setter Property="Border.BorderBrush" Value="LightGray"/>
+        <Setter Property="Border.BorderThickness" Value="1, 0, 0, 0"/>
+        <Setter Property="Border.Background" Value="{x:Null}"/>
+    </Style>
+
+    <Style x:Key="lastBorderToColumns">
+        <Setter Property="Border.BorderBrush" Value="LightGray"/>
+        <Setter Property="Border.BorderThickness" Value="1, 0, 1, 0"/>
+        <Setter Property="Border.Background" Value="{x:Null}"/>
+    </Style>
+
+    <Style x:Key="borderToRows">
+        <Setter Property="Border.BorderBrush" Value="LightGray"/>
+        <Setter Property="Border.BorderThickness" Value="0, 0, 0, 1"/>
+        <Setter Property="Border.Background" Value="{x:Null}"/>
+    </Style>
+
+    <Style x:Key="stackPanelWeek">
+        <Setter Property="StackPanel.Height" Value="75"/>
+        <Setter Property="StackPanel.HorizontalAlignment" Value="Center"/>
+    </Style>
 </ResourceDictionary>

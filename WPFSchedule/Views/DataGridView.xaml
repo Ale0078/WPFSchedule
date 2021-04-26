@@ -90,26 +90,58 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="0" Grid.Column="0">
+            <Border Grid.RowSpan="2" Grid.Column="0"
+                    Style="{StaticResource borderToColumns}"/>
+            <Border Grid.RowSpan="2" Grid.Column="1"
+                    Style="{StaticResource borderToColumns}"/>
+            <Border Grid.RowSpan="2" Grid.Column="2"
+                    Style="{StaticResource borderToColumns}"/>
+            <Border Grid.RowSpan="2" Grid.Column="3"
+                    Style="{StaticResource borderToColumns}"/>
+            <Border Grid.RowSpan="2" Grid.Column="4"
+                    Style="{StaticResource borderToColumns}"/>
+            <Border Grid.RowSpan="2" Grid.Column="5"
+                    Style="{StaticResource borderToColumns}"/>
+            <Border Grid.RowSpan="2" Grid.Column="6"
+                    Style="{StaticResource lastBorderToColumns}"/>
+
+            <Border Grid.Row="0" Grid.ColumnSpan="7"
+                    Style="{StaticResource borderToRows}"/>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" 
+                        Style="{StaticResource stackPanelWeek}">
                 <TextBlock Text="Sun" Style="{StaticResource dayOfWeek}"/>
+                <TextBlock Text="{Binding StringFormat={}{0:dd.MM}, Path=Sunday}" Style="{StaticResource dayOfWeek}"/>
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="1">
+            <StackPanel Grid.Row="0" Grid.Column="1"
+                        Style="{StaticResource stackPanelWeek}">
                 <TextBlock Text="Mon" Style="{StaticResource dayOfWeek}"/>
+                <TextBlock Text="{Binding StringFormat={}{0:dd.MM}, Path=Monday}" Style="{StaticResource dayOfWeek}"/>
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="2">
+            <StackPanel Grid.Row="0" Grid.Column="2"
+                        Style="{StaticResource stackPanelWeek}">
                 <TextBlock Text="Tue" Style="{StaticResource dayOfWeek}"/>
+                <TextBlock Text="{Binding StringFormat={}{0:dd.MM}, Path=Tuesday}" Style="{StaticResource dayOfWeek}"/>
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="3">
+            <StackPanel Grid.Row="0" Grid.Column="3"
+                        Style="{StaticResource stackPanelWeek}">
                 <TextBlock Text="Wed" Style="{StaticResource dayOfWeek}"/>
+                <TextBlock Text="{Binding StringFormat={}{0:dd.MM}, Path=Wednesday}" Style="{StaticResource dayOfWeek}"/>
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="4">
+            <StackPanel Grid.Row="0" Grid.Column="4"
+                        Style="{StaticResource stackPanelWeek}">
                 <TextBlock Text="Thu" Style="{StaticResource dayOfWeek}"/>
+                <TextBlock Text="{Binding StringFormat={}{0:dd.MM}, Path=Thursday}" Style="{StaticResource dayOfWeek}"/>
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="5">
+            <StackPanel Grid.Row="0" Grid.Column="5"
+                        Style="{StaticResource stackPanelWeek}">
                 <TextBlock Text="Fri" Style="{StaticResource dayOfWeek}"/>
+                <TextBlock Text="{Binding StringFormat={}{0:dd.MM}, Path=Friday}" Style="{StaticResource dayOfWeek}"/>
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="6">
+            <StackPanel Grid.Row="0" Grid.Column="6"
+                        Style="{StaticResource stackPanelWeek}">
                 <TextBlock Text="Sat" Style="{StaticResource dayOfWeek}"/>
+                <TextBlock Text="{Binding StringFormat={}{0:dd.MM}, Path=Saturday}" Style="{StaticResource dayOfWeek}"/>
             </StackPanel>
 
             <ListBox Grid.Row="1" Grid.Column="0" 

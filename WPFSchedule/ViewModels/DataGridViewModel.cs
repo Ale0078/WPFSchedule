@@ -32,6 +32,11 @@ namespace WPFSchedule.ViewModels
         }
 
         public DateTime Sunday => SelectedDay.GetStartAndEndWeek().startWeek;
+        public DateTime Monday => Sunday.AddDays(1);
+        public DateTime Tuesday => Sunday.AddDays(2);
+        public DateTime Wednesday => Sunday.AddDays(3);
+        public DateTime Thursday => Sunday.AddDays(4);
+        public DateTime Friday => Sunday.AddDays(5);
         public DateTime Saturday => SelectedDay.GetStartAndEndWeek().endWeek;
 
         public IEnumerable<ScheduledEvent> SundayScheduledEvents => ScheduledEvents
@@ -125,6 +130,11 @@ namespace WPFSchedule.ViewModels
         private void OnChangWeek() 
         {
             OnPropertyChanged("Sunday");
+            OnPropertyChanged("Monday");
+            OnPropertyChanged("Tuesday");
+            OnPropertyChanged("Wednesday");
+            OnPropertyChanged("Thursday");
+            OnPropertyChanged("Friday");
             OnPropertyChanged("Saturday");
 
             OnPropertyChanged("SundayScheduledEvents");
