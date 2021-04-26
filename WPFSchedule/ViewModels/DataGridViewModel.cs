@@ -17,9 +17,14 @@ namespace WPFSchedule.ViewModels
 {
     public class DataGridViewModel : INotifyPropertyChanged
     {
+        private const int DAY_IN_WEEK = 7;
+
         private DateTime _selectedDay;
         private SqlQuery _sqlQuery;
         private ObservableCollection<ScheduledEvent> _scheduledEvents;
+
+        private RelayCommand _nextWeek;
+        private RelayCommand _previousWeek;
 
         public DataGridViewModel() 
         {
@@ -57,11 +62,37 @@ namespace WPFSchedule.ViewModels
             .Where(scheduledEvent => scheduledEvent.EventStart.DayOfWeek == DayOfWeek.Saturday)
             .Select(scheduledEvent => scheduledEvent);
 
+        public RelayCommand NextWeek 
+        {
+            get 
+            {
+                return _nextWeek ?? (_nextWeek = new RelayCommand(parameter =>
+                {
+                    SelectedDay = SelectedDay.AddDays(DAY_IN_WEEK);
+
+                    OnChangWeek();
+                }));
+            }
+        }
+
+        public RelayCommand PreviousWeek 
+        {
+            get 
+            {
+                return _previousWeek ?? (_previousWeek = new RelayCommand(parameter =>
+                {
+                    SelectedDay = SelectedDay.AddDays(-DAY_IN_WEEK);
+
+                    OnChangWeek();
+                }));
+            }
+        }
+
         public DateTime SelectedDay 
         {
             get 
             {
-                return _selectedDay == default ? new DateTime(2021, 02, 07) /*DateTime.Now*/ : _selectedDay;
+                return _selectedDay == default ? DateTime.Now : _selectedDay;
             }
             set 
             {
@@ -91,61 +122,19 @@ namespace WPFSchedule.ViewModels
             ScheduledEvents = _sqlQuery.SelectScheduledEvents(SelectedDay);
         }
 
-        #region ================================== Inctence SqlQuare ==========================
-        private RelayCommand showMessage;
-
-        public RelayCommand ShowMessage 
+        private void OnChangWeek() 
         {
-            get 
-            {
-                return showMessage
-                    ?? (showMessage = new RelayCommand(obj =>
-                    {
-                        MessageBox.Show(GetDBMessage());
-                    }));
-            }
+            OnPropertyChanged("Sunday");
+            OnPropertyChanged("Saturday");
+
+            OnPropertyChanged("SundayScheduledEvents");
+            OnPropertyChanged("MondayScheduledEvents");
+            OnPropertyChanged("TuesdayScheduledEvents");
+            OnPropertyChanged("WednesdayScheduledEvents");
+            OnPropertyChanged("ThursdayScheduledEvents");
+            OnPropertyChanged("FridayScheduledEvents");
+            OnPropertyChanged("SaturdayScheduledEvents");
         }
-        
-        private string GetDBMessage() 
-        {
-            string connection = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
-            using (var sqlConnection = new MySqlConnection(connection)) 
-            {
-                sqlConnection.Open();                
-
-                string query = "SELECT * FROM soft.scheduled_event WHERE soft.scheduled_event.event_finish < @date";
-                MySqlCommand command = new MySqlCommand(query, sqlConnection);
-
-                MySqlParameter mySqlParameter = new MySqlParameter
-                {
-                    ParameterName = "@date",
-                    MySqlDbType = MySqlDbType.DateTime,
-                    Value = new DateTime(2021, 01, 20)
-                };
-                command.Parameters.Add(mySqlParameter);
-                command.Prepare();
-
-                string answer = "";
-
-                using (MySqlDataReader reader = command.ExecuteReader()) 
-                {
-                    while (reader.Read()) 
-                    {
-                        object[] objs = new object[8];
-
-                        _ = reader.GetValues(objs);
-
-                        answer += string.Join("|", objs);
-
-                        answer += "\n";
-                    }
-                }                
-
-                return answer;
-            }
-        }
-        #endregion
 
         #region ===================== Notifier ==========================
         public event PropertyChangedEventHandler PropertyChanged;

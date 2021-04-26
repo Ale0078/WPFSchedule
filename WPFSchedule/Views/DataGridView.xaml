@@ -34,16 +34,24 @@
             <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1" Width="228px">
                 <Button
                         Background="#FFFFAE00" 
-                        Style="{StaticResource buttonTriangle}"/>
+                        Style="{StaticResource buttonTriangle}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding PreviousWeek}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+
                 <TextBlock 
-                    Text="{Binding StringFormat={}{0:dd.MM}, Path=Sunday}" 
+                    Text="{Binding StringFormat={}{0:dd.MM}, Path=Sunday, UpdateSourceTrigger=PropertyChanged}" 
                     Style="{StaticResource date}"/>
                 <TextBlock 
                     Text="—" 
                     Style="{StaticResource hyphen}"/>
                 <TextBlock 
-                    Text="{Binding StringFormat={}{0:dd.MM}, Path=Saturday}" 
+                    Text="{Binding StringFormat={}{0:dd.MM}, Path=Saturday, UpdateSourceTrigger=PropertyChanged}" 
                     Style="{StaticResource date}"/>
+                
                 <Button 
                     Background="#FFFFAE00" 
                     Style="{StaticResource buttonTriangle}" 
@@ -53,6 +61,11 @@
                             <RotateTransform Angle="180"/>
                         </TransformGroup>
                     </Button.RenderTransform>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding NextWeek}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </Button>
             </StackPanel>
 
