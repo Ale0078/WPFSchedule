@@ -38,30 +38,26 @@ namespace WPFSchedule.Helpers.SqlQueries
             return scheduledEvents;
         }
 
-        public ObservableCollection<EventOccurence> SelectedEventOccurence(DateTime selectedDay) 
-        {
-            ObservableCollection<EventOccurence> eventOccurences = new ObservableCollection<EventOccurence>();
+        //public ObservableCollection<EventOccurence> SelectedEventOccurence(DateTime selectedDay)
+        //{
+        //    ObservableCollection<EventOccurence> eventOccurences = new ObservableCollection<EventOccurence>();
+
+        //    using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString)) 
+        //    {
+        //        connection.Open();
 
 
+        //    }
 
-            return eventOccurences;
-        }
+        //    return eventOccurences;
+        //}
 
         private MySqlCommand GetCommandToSelectScheduledEvents(DateTime selectedDay, MySqlConnection connection) 
         {
             (DateTime startWeek, DateTime endWeek) = selectedDay.GetStartAndEndWeek();
 
-            string command = "SELECT  id,\n" +
-                    "(SELECT id FROM soft.event_occurence WHERE id = soft.scheduled_event.event_occurence_id) AS event_occurence_id,\n" +
-                    "student_group_id,\n" +
-                    "theme_id,\n" +
-                    "mentor_id,\n" +
-                    "lesson_id,\n" +
-                    "event_start,\n" +
-                    "event_finish\n" +
-                    "FROM soft.scheduled_event\n" +
-                    "WHERE NOT (event_start > @end AND event_finish > @end)\n" +
-                    "AND NOT (event_start < @start AND event_finish < @start)";
+            string command = "SELECT * FROM soft.scheduled_event\n" +
+                "WHERE event_start >= @start AND @end >= event_finish";
 
             MySqlCommand query = new MySqlCommand(command, connection);
 

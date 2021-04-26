@@ -9,15 +9,82 @@ using WPFSchedule.Models.Enums;
 
 namespace WPFSchedule.Helpers.Parsers
 {
-    public class StoragePatternParser
+    public static class StoragePatternParser
     {
         private const int _daysInWeek = 7;
         private const int _maxDaysInMonth = 31;
         private const int _possibleMonthIndexOptionsNumber = 5;
 
-        public static StoragePattern GetFullDataFromStorage(long source)
+        public static long GetPatternStorageValue(StoragePattern source)
         {
-            string stringRepresentationOfStorage = Convert.ToString(source, 2);
+            (long result, long position) data = (0, 1);
+
+            return data.AddWeekDays(source)
+                .AddMonthIndex(source)
+                .AddDates(source)
+                .AddInterval(source);
+        }
+
+        private static (long result, long position) AddWeekDays(this (long result, long index) data, StoragePattern source)
+        {
+            long defaultValue = data.index;
+
+            if (source.DaysOfWeek != null)
+            {
+                foreach (DayOfWeek item in source.DaysOfWeek)
+                {
+                    data.index <<= (int)item;
+                    data.result |= data.index;
+                    data.index = defaultValue;
+                }
+            }
+
+            data.index <<= _daysInWeek;
+
+            return data;
+        }
+
+        private static (long result, long index) AddMonthIndex(this (long result, long index) data, StoragePattern source)
+        {
+            if (source.Index.HasValue)
+            {
+                data.result |= data.index << (int)source.Index;
+            }
+
+            data.index <<= _possibleMonthIndexOptionsNumber;
+
+            return data;
+        }
+
+        private static (long result, long index) AddDates(this (long result, long index) data, StoragePattern source)
+        {
+            long defaultValue = data.index;
+
+            if (source.Dates != null)
+            {
+                foreach (int item in source.Dates)
+                {
+                    data.index <<= item;
+                    data.result |= data.index;
+                    data.index = defaultValue;
+                }
+            }
+
+            data.index <<= _maxDaysInMonth + 1;
+
+            return data;
+        }
+
+        private static long AddInterval(this (long result, long index) data, StoragePattern source)
+        {
+            data.result |= data.index << source.Interval;
+
+            return data.result;
+        }
+
+        public static StoragePattern GetFullDataFromStorage(long storage)
+        {
+            string stringRepresentationOfStorage = Convert.ToString(storage, 2);
 
             string daysString = stringRepresentationOfStorage
                 .Substring(stringRepresentationOfStorage.Length - _daysInWeek);
