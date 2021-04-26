@@ -14,7 +14,36 @@
     <Page.DataContext>
         <local:DataGridViewModel/>
     </Page.DataContext>
+    <Page.Resources>
+        <ResourceDictionary Source="../Resources/LibToDataGridView.xaml"/>
+    </Page.Resources>
+    
     <Grid Background="White">
-        <DataGrid ItemsSource="{Binding ScheduledEvents}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="15,10,15,10" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Button Height="40" Width="40" Background="#FFFFAE00" Style="{StaticResource ButtonTriangle}"/>
+                <TextBlock Text="{Binding Sunday}" VerticalAlignment="Center"/>
+                <TextBlock Text="-" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Saturday}" VerticalAlignment="Center"/>
+                <Button Height="40" Width="40" Background="#FFFFAE00" Style="{StaticResource ButtonTriangle}" RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="180"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

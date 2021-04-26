@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel; 
 using System.Runtime.CompilerServices;
@@ -25,10 +26,36 @@ namespace WPFSchedule.ViewModels
             _sqlQuery = new SqlQuery();
         }
 
-        public DateTime StartWeek => SelectedDay.GetStartAndEndWeek().startWeek;
-        public DateTime EndWeek => SelectedDay.GetStartAndEndWeek().endWeek;
+        public DateTime Sunday => SelectedDay.GetStartAndEndWeek().startWeek;
+        public DateTime Saturday => SelectedDay.GetStartAndEndWeek().endWeek;
 
-        
+        public IEnumerable<ScheduledEvent> SundayScheduledEvents => ScheduledEvents
+            .Where(scheduledEvent => scheduledEvent.EventStart.DayOfWeek == DayOfWeek.Sunday)
+            .Select(scheduledEvent => scheduledEvent);
+
+        public IEnumerable<ScheduledEvent> MondayScheduledEvents => ScheduledEvents
+            .Where(scheduledEvent => scheduledEvent.EventStart.DayOfWeek == DayOfWeek.Monday)
+            .Select(scheduledEvent => scheduledEvent);
+
+        public IEnumerable<ScheduledEvent> TuesdayScheduledEvents => ScheduledEvents
+            .Where(scheduledEvent => scheduledEvent.EventStart.DayOfWeek == DayOfWeek.Tuesday)
+            .Select(scheduledEvent => scheduledEvent);
+
+        public IEnumerable<ScheduledEvent> WednesdayScheduledEvents => ScheduledEvents
+            .Where(scheduledEvent => scheduledEvent.EventStart.DayOfWeek == DayOfWeek.Wednesday)
+            .Select(scheduledEvent => scheduledEvent);
+
+        public IEnumerable<ScheduledEvent> ThursdayScheduledEvents => ScheduledEvents
+            .Where(scheduledEvent => scheduledEvent.EventStart.DayOfWeek == DayOfWeek.Thursday)
+            .Select(scheduledEvent => scheduledEvent);
+
+        public IEnumerable<ScheduledEvent> FridayScheduledEvents => ScheduledEvents
+            .Where(scheduledEvent => scheduledEvent.EventStart.DayOfWeek == DayOfWeek.Friday)
+            .Select(scheduledEvent => scheduledEvent);
+
+        public IEnumerable<ScheduledEvent> SaturdayScheduledEvents => ScheduledEvents
+            .Where(scheduledEvent => scheduledEvent.EventStart.DayOfWeek == DayOfWeek.Saturday)
+            .Select(scheduledEvent => scheduledEvent);
 
         public DateTime SelectedDay 
         {
