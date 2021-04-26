@@ -61,7 +61,7 @@ namespace WPFSchedule.ViewModels
         {
             get 
             {
-                return _selectedDay == default ? DateTime.Now : _selectedDay;
+                return _selectedDay == default ? new DateTime(2021, 02, 07) /*DateTime.Now*/ : _selectedDay;
             }
             set 
             {

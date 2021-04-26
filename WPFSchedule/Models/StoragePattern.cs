@@ -7,7 +7,7 @@ namespace WPFSchedule.Models
 {
     public class StoragePattern
     {
-        public PatternType Type { get; set; } //
+        public PatternType Type { get; set; } 
 
         public int Interval { get; set; }
 
