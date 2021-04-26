@@ -31,6 +31,20 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Border Width="141" Height="31" 
+                        Style ="{StaticResource elementsColor}" >
+                    <TextBox Height="29" Width="139"/>
+                </Border>
+                <Viewbox Width="50" Height="50">
+                    <DatePicker Width="30" Height="30" Margin="0,5,5,0" BorderBrush="{x:Null}"/>
+                </Viewbox>
+
+                <Button Width="60" Height="30" Content="Today"
+                        Style ="{StaticResource addSchedule}">
+                </Button>
+            </StackPanel>
+
             <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1" Width="228px">
                 <Button
                         Background="#FFFFAE00" 
@@ -71,7 +85,6 @@
 
             <Button 
                 Grid.Column="2" 
-                Background="#FFFFAE00" 
                 Style="{StaticResource addSchedule}"/>
         </Grid>
 
