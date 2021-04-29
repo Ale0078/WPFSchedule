@@ -1,4 +1,4 @@
-﻿namespace WPFSchedule.Models.Enums 
+﻿namespace WhatProject.Data.Enums 
 {
     public enum PatternType
     {

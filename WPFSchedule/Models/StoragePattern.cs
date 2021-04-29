@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 using WPFSchedule.Models.Enums;
 
+using WhatProject.Data.Enums;
+
 namespace WPFSchedule.Models
 {
     public class StoragePattern
