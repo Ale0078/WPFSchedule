@@ -32,35 +32,11 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <StackPanel Height="56" Orientation="Vertical">
-                    <Border Width="71" Height="31" 
-                        Style ="{StaticResource elementsColor}">
-                        <TextBox x:Name="dateText" Text="{Binding StringFormat={}{0:MM.dd.yy}, Path=SelectedDay}" Height="29" Width="69">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="LostFocus">
-                                    <i:InvokeCommandAction Command="{Binding SwitchSelectedDay}" CommandParameter="{Binding ElementName=dateText}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </TextBox>
-                    </Border>
-                    <Button Width="70" Height="20" Content="Apply" Style="{StaticResource addSchedule}" Margin="2">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding ApplySelectDayToDatePicker}" CommandParameter="{Binding ElementName=date}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                </StackPanel>
-                
-                <Viewbox Width="50" Height="50">
-                    <DatePicker x:Name="date" Width="30" Height="30" Margin="0,5,5,0" BorderBrush="{x:Null}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectedDateChanged">
-                                <i:InvokeCommandAction Command="{Binding SwitchDayToDatePickerDay}" CommandParameter="{Binding ElementName=date}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </DatePicker>
-                </Viewbox>
+                <DatePicker 
+                    Height="30" 
+                    Margin="0,5,5,0" 
+                    BorderBrush="#FFFFAE00"                     
+                    SelectedDate="{Binding SelectedDay, Mode=TwoWay}"/>
 
                 <Button Width="60" Height="30" Content="Today"
                         Style ="{StaticResource addSchedule}"
@@ -74,7 +50,7 @@
                         Style="{StaticResource buttonTriangle}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding PreviousWeek}" CommandParameter="{Binding ElementName=date}"/>
+                            <i:InvokeCommandAction Command="{Binding PreviousWeek}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
@@ -100,7 +76,7 @@
                     </Button.RenderTransform>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding NextWeek}" CommandParameter="{Binding ElementName=date}"/>
+                            <i:InvokeCommandAction Command="{Binding NextWeek}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>

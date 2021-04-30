@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Controls;
 
 using WPFSchedule.Models.Commands;
 using WPFSchedule.Helpers.Extensions;
@@ -21,10 +20,7 @@ namespace WPFSchedule.ViewModels
 
         private RelayCommand _nextWeek;
         private RelayCommand _previousWeek;
-        private RelayCommand _switchSelectedDay;
         private RelayCommand _selectCurrentDay;
-        private RelayCommand _switchDayToDatePickerDay;
-        private RelayCommand _applySelectDayToDatePicker;
 
         public DataGridViewModel()
         {
@@ -68,8 +64,6 @@ namespace WPFSchedule.ViewModels
                 {
                     SelectedDay = SelectedDay.AddDays(DAY_IN_WEEK);
 
-                    ApplySelectDayToDatePicker.Execute(datePicker);
-
                     OnChangWeek();
                 }));
             }
@@ -83,27 +77,7 @@ namespace WPFSchedule.ViewModels
                 {
                     SelectedDay = SelectedDay.AddDays(-DAY_IN_WEEK);
 
-                    ApplySelectDayToDatePicker.Execute(datePicker);
-
                     OnChangWeek();
-                }));
-            }
-        }
-
-        public RelayCommand SwitchSelectedDay 
-        {
-            get 
-            {
-                return _switchSelectedDay ?? (_switchSelectedDay = new RelayCommand(date =>
-                {
-                    TextBox text = (TextBox)date;
-
-                    if (DateTime.TryParse(text.Text, out _))
-                    {
-                        SelectedDay = DateTime.Parse(text.Text);
-
-                        OnChangWeek();
-                    }
                 }));
             }
         }
@@ -121,34 +95,6 @@ namespace WPFSchedule.ViewModels
             }
         }
 
-        public RelayCommand SwitchDayToDatePickerDay 
-        {
-            get
-            {
-                return _switchDayToDatePickerDay ?? (_switchDayToDatePickerDay = new RelayCommand(datePicker =>
-                {
-                    DatePicker picker = (DatePicker)datePicker;
-
-                    SelectedDay = picker.SelectedDate.Value;
-
-                    OnChangWeek();
-                }));
-            }
-        }
-
-        public RelayCommand ApplySelectDayToDatePicker
-        {
-            get
-            {
-                return _applySelectDayToDatePicker ?? (_applySelectDayToDatePicker = new RelayCommand(datePicker =>
-                {
-                    DatePicker picker = (DatePicker)datePicker;
-
-                    picker.SelectedDate = SelectedDay;
-                }));
-            }
-        }
-
         public DateTime SelectedDay 
         {
             get 
@@ -160,6 +106,7 @@ namespace WPFSchedule.ViewModels
                 _selectedDay = value;
 
                 OnPropertyChanged("SelectedDay");
+                OnChangWeek();
             }
         }
 
