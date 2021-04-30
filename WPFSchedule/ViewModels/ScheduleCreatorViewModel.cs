@@ -28,8 +28,8 @@ namespace WPFSchedule.ViewModels
             };
         }
 
-        private TimeSpan _startTime;
-        private TimeSpan _endTiime;
+        //private TimeSpan _startTime;
+        //private TimeSpan _endTiime;
         private int _chosedInterval;
 
         public DateTime ChosedDate { get; set; } = DateTime.Today;
@@ -74,20 +74,20 @@ namespace WPFSchedule.ViewModels
             get => EventOccurrenceList[3];
         }
 
-        public TimeSpan StartTime
-        {
-            get => StartTimeList.First(t => t.TotalHours == 10);
-            set
-            {
-                _startTime = value;
-            }
-        }
+        //public TimeSpan StartTime
+        //{
+        //    get => StartTimeList.First(t => t.TotalHours == 10);
+        //    set
+        //    {
+        //        _startTime = value;
+        //    }
+        //}
 
-        public TimeSpan EndTime
-        {
-            get => StartTimeList.First(t => t.TotalHours == 12);
-            set => _endTiime = value;
-        }
+        //public TimeSpan EndTime
+        //{
+        //    get => StartTimeList.First(t => t.TotalHours == 12);
+        //    set => _endTiime = value;
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 
