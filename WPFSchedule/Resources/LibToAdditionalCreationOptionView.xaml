@@ -1,0 +1,124 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="repeatTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="Text" Value="Repeat with interval"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Margin" Value="5,0,5,0"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Padding" Value="0,3,0,0"/>
+    </Style>
+    
+    <Style x:Key="interval" TargetType="{x:Type TextBox}">
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <!--<SolidColorBrush x:Key="ButtonBrush" Color="OrangeRed" />
+
+    <Storyboard x:Key="changeBackgroundStoryboard">
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background">
+            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource ButtonBrush}" />
+        </ObjectAnimationUsingKeyFrames>
+    </Storyboard>
+
+    <EventTrigger RoutedEvent="Click">
+        <BeginStoryboard Storyboard="{StaticResource changeBackgroundStoryboard}"/>
+    </EventTrigger>-->
+
+    <Style x:Key="weekDay" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="25"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="Gainsboro">
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Ellipse Fill="{TemplateBinding Background}"/>
+                        <Ellipse>
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Offset="0" Color="#00000000"/>
+                                    <GradientStop Offset="0.88" Color="#00000000"/>
+                                    <GradientStop Offset="1" Color="#80000000"/>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="content" Property="RenderTransform">
+                                <Setter.Value>
+                                    <TranslateTransform Y="0.5" X="0.5"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="repeatingDays" TargetType="{x:Type TextBlock}">
+        <Setter Property="Text" Value="Repeating days "/>
+        <Setter Property="Height" Value="17"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="endTime" TargetType="{x:Type RadioButton}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="endDate" TargetType="{x:Type DatePicker}">
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Margin" Value="0,0,6,0"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="defaultDate" TargetType="{x:Type TextBox}">
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="0,0,5,0"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+    </Style>
+
+    <Style x:Key="repeatList" TargetType="{x:Type ComboBox}">
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Margin" Value="5,0,5,0"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="exit" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="60"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+
+</ResourceDictionary>

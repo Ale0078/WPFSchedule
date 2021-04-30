@@ -5,9 +5,11 @@ using System.Runtime.CompilerServices;
 
 using WPFSchedule.Models.Commands;
 using WPFSchedule.Helpers.Extensions;
-using WPFSchedule.Helpers.Queries;
 
+using WPFSchedule.Helpers.Queries;
 using WhatProject.Data.Entities;
+
+using WPFSchedule.Views;
 
 namespace WPFSchedule.ViewModels
 {
@@ -21,6 +23,7 @@ namespace WPFSchedule.ViewModels
         private RelayCommand _nextWeek;
         private RelayCommand _previousWeek;
         private RelayCommand _selectCurrentDay;
+        private RelayCommand _createSchedule;
 
         public DataGridViewModel()
         {
@@ -56,28 +59,44 @@ namespace WPFSchedule.ViewModels
         public ObservableCollection<ScheduledEvent> SaturdayScheduledEvents =>
             _query.GetScheduledEvents(DayOfWeek.Saturday, Sunday, Saturday);
 
-        public RelayCommand NextWeek 
+        public RelayCommand NextWeek
         {
-            get 
+            get
             {
                 return _nextWeek ?? (_nextWeek = new RelayCommand(datePicker =>
                 {
                     SelectedDay = SelectedDay.AddDays(DAY_IN_WEEK);
 
-                    OnChangWeek();
+                    OnChangeWeek();
                 }));
             }
         }
 
-        public RelayCommand PreviousWeek 
+        public RelayCommand PreviousWeek
         {
-            get 
+            get
             {
                 return _previousWeek ?? (_previousWeek = new RelayCommand(datePicker =>
                 {
                     SelectedDay = SelectedDay.AddDays(-DAY_IN_WEEK);
 
-                    OnChangWeek();
+                    OnChangeWeek();
+                }));
+            }
+        }
+
+        public RelayCommand CreateSchedule
+        {
+            get
+            {
+                return _createSchedule ?? (_createSchedule = new RelayCommand(parameter =>
+                {
+                    ScheduleCreatorView scheduleCreator = new ScheduleCreatorView
+                    {
+                        Owner = App.Current.MainWindow
+                    };
+
+                    scheduleCreator.ShowDialog();
                 }));
             }
         }
@@ -90,7 +109,7 @@ namespace WPFSchedule.ViewModels
                 {
                     SelectedDay = DateTime.Now;
 
-                    OnChangWeek();
+                    OnChangeWeek();
                 }));
             }
         }
@@ -106,11 +125,11 @@ namespace WPFSchedule.ViewModels
                 _selectedDay = value;
 
                 OnPropertyChanged("SelectedDay");
-                OnChangWeek();
+                OnChangeWeek();
             }
         }
 
-        private void OnChangWeek() 
+        private void OnChangeWeek() 
         {
             OnPropertyChanged("Sunday");
             OnPropertyChanged("Monday");

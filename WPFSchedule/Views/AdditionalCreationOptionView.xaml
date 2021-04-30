@@ -1,0 +1,127 @@
+﻿<Window x:Class="WPFSchedule.Views.AdditionalCreationOptionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:l="clr-namespace:WPFSchedule.ViewModels" 
+      xmlns:local="clr-namespace:WPFSchedule.Models" 
+        mc:Ignorable="d"
+        Title="AdditionalCreationOptionView" Height="270" Width="270" MaxHeight="270" MaxWidth="270">
+
+    <Window.DataContext>
+        <l:AdditionalCreationOptionViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/LibToAdditionalCreationOptionView.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <local:StoragePattern  x:Key="storage" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.3*"/> 
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Style="{StaticResource repeatTextBlock}"/>
+            <TextBox Style="{StaticResource interval}"
+                     Text="{Binding Interval, Mode=TwoWay}"/>
+            <ComboBox Style="{StaticResource repeatList}"
+                      ItemsSource="{Binding IntervalList}"
+                      SelectedValue="{Binding DisplayedEventOccurrence, Mode=OneWay}"
+                      SelectedIndex="{Binding OccurrenceTime, Mode=OneWayToSource}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <TextBlock Style="{StaticResource repeatingDays}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,2,5,2">
+                <Button Style="{StaticResource weekDay}"
+                        Name="Sunday"
+                        Content="Sun"
+                        Command="{Binding ChangeDateList}"
+                        CommandParameter="{Binding Source={StaticResource storage}}"
+                        Background="Gainsboro"/>
+                <Button Style="{StaticResource weekDay}"
+                        Name="Monday"
+                        Content="Mon"
+                        Command="{Binding ChangeDateList}"
+                        CommandParameter="{Binding ElementName=Monday}"
+                        Background="Gainsboro"/>
+                <Button Style="{StaticResource weekDay}"
+                        Name="Tuesday"
+                        Content="Tue"
+                        Command="{Binding ChangeDateList}"
+                        CommandParameter="{Binding ElementName=Tuesday}"
+                        Background="Gainsboro"/>
+                <Button Style="{StaticResource weekDay}"
+                        Name="Wednesday"
+                        Content="Wed"
+                        Command="{Binding ChangeDateList}"
+                        CommandParameter="{Binding ElementName=Wednesday}"
+                        Background="Gainsboro"/>
+                <Button Style="{StaticResource weekDay}"
+                        Name="Thursday"
+                        Content="Thu"
+                        Command="{Binding ChangeDateList}"
+                        CommandParameter="{Binding ElementName=Thursday}"
+                        Background="Gainsboro"/>
+                <Button Style="{StaticResource weekDay}"
+                        Name="Friday"
+                        Content="Fri"
+                        Command="{Binding ChangeDateList}"
+                        CommandParameter="{Binding ElementName=Friday}"
+                        Background="Gainsboro"/>
+                <Button Style="{StaticResource weekDay}"
+                        Name="Saturday"
+                        Content="Sat"
+                        Command="{Binding ChangeDateList}"
+                        CommandParameter="{Binding ElementName=Saturday}"
+                        Background="Gainsboro"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <RadioButton Grid.Row="0" Grid.Column="0" GroupName="endDateChanger"
+                         Style="{StaticResource endTime}"
+                         Content="Default"
+                         IsChecked="True"/>
+            <RadioButton Grid.Row="1" Grid.Column="0" GroupName="endDateChanger"
+                         Style="{StaticResource endTime}"
+                         Content="Date" Margin="0,0,10,0"/>
+            <TextBox Grid.Row="0" Grid.Column="1"
+                     Style="{StaticResource defaultDate}"
+                     Text="{Binding DefaultEndTime, StringFormat={}{0:dd.MM.yyyy}, Mode=OneWay}"/>
+            <DatePicker Grid.Row="1" Grid.Column="1"
+                        Style="{StaticResource endDate}"/>
+        </Grid>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Center">
+            <Button Style="{StaticResource exit}"
+                    Content="Save"
+                    Command="{Binding SaveData}"/>
+            <Button Style="{StaticResource exit}"
+                    Content="Close"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

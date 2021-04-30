@@ -9,7 +9,7 @@ namespace WPFSchedule.Helpers.Parsers
     public static class StoragePatternParser
     {
         private const int DAYS_IN_WEEK = 7;
-        private const int MAX_DAYS_IN_WEEK = 31;
+        private const int MAX_DAYS_IN_MONTH = 31;
         private const int POSSIBLE_MONTH_INDEX_OPTIONS_NUMBER = 5;
 
         public static long GetPatternStorageValue(StoragePattern source)
@@ -24,15 +24,11 @@ namespace WPFSchedule.Helpers.Parsers
 
         private static (long result, long position) AddWeekDays(this (long result, long index) data, StoragePattern source)
         {
-            long defaultValue = data.index;
-
             if (source.DaysOfWeek != null)
             {
                 foreach (DayOfWeek item in source.DaysOfWeek)
                 {
-                    data.index <<= (int)item;
-                    data.result |= data.index;
-                    data.index = defaultValue;
+                    data.result |= data.index << (int)item;
                 }
             }
 
@@ -55,19 +51,15 @@ namespace WPFSchedule.Helpers.Parsers
 
         private static (long result, long index) AddDates(this (long result, long index) data, StoragePattern source)
         {
-            long defaultValue = data.index;
-
             if (source.Dates != null)
             {
                 foreach (int item in source.Dates)
                 {
-                    data.index <<= item;
-                    data.result |= data.index;
-                    data.index = defaultValue;
+                    data.result |= data.index << (int)item;
                 }
             }
 
-            data.index <<= MAX_DAYS_IN_WEEK + 1;
+            data.index <<= MAX_DAYS_IN_MONTH + 1;
 
             return data;
         }
@@ -83,17 +75,19 @@ namespace WPFSchedule.Helpers.Parsers
         {
             string stringRepresentationOfStorage = Convert.ToString(storage, 2);
 
+            int subtractionPart = stringRepresentationOfStorage.Length - DAYS_IN_WEEK;
+
             string daysString = stringRepresentationOfStorage
-                .Substring(stringRepresentationOfStorage.Length - DAYS_IN_WEEK);
+                .Substring(subtractionPart);
 
             string indexString = stringRepresentationOfStorage
-                .Substring(stringRepresentationOfStorage.Length - DAYS_IN_WEEK - POSSIBLE_MONTH_INDEX_OPTIONS_NUMBER, POSSIBLE_MONTH_INDEX_OPTIONS_NUMBER);
+                .Substring(subtractionPart -= POSSIBLE_MONTH_INDEX_OPTIONS_NUMBER, POSSIBLE_MONTH_INDEX_OPTIONS_NUMBER);
 
             string datesString = stringRepresentationOfStorage
-                .Substring(stringRepresentationOfStorage.Length - DAYS_IN_WEEK - POSSIBLE_MONTH_INDEX_OPTIONS_NUMBER - MAX_DAYS_IN_WEEK - 1, MAX_DAYS_IN_WEEK);
+                .Substring(subtractionPart -= MAX_DAYS_IN_MONTH - 1, MAX_DAYS_IN_MONTH);
 
             string intervalString = stringRepresentationOfStorage
-                .Substring(0, stringRepresentationOfStorage.Length - DAYS_IN_WEEK - POSSIBLE_MONTH_INDEX_OPTIONS_NUMBER - MAX_DAYS_IN_WEEK - 1);
+                .Substring(0, subtractionPart);
 
             return new StoragePattern
             {
@@ -132,7 +126,7 @@ namespace WPFSchedule.Helpers.Parsers
             {
                 if (datesString[i] == '1')
                 {
-                    datesCollection.Add(MAX_DAYS_IN_WEEK - i);
+                    datesCollection.Add(MAX_DAYS_IN_MONTH - i);
                 }
             }
 
