@@ -12,12 +12,12 @@ namespace WPFSchedule.Helpers.Extensions
                 , selectedDate.AddDays(DAYS_IN_WEEK - (int)selectedDate.DayOfWeek - 1));
         }
 
-        public static void NextWeek(this DateTime selectedDate) 
+        public static void NextWeek(this DateTime selectedDate)
         {
             selectedDate = selectedDate.AddDays(DAYS_IN_WEEK);
         }
 
-        public static void PreviousWeek(this DateTime selectedDate) 
+        public static void PreviousWeek(this DateTime selectedDate)
         {
             selectedDate = selectedDate.AddDays(-DAYS_IN_WEEK);
         }

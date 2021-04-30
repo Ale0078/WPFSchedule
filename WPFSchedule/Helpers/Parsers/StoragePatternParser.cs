@@ -27,15 +27,11 @@ namespace WPFSchedule.Helpers.Parsers
 
         private static (long result, long position) AddWeekDays(this (long result, long index) data, StoragePattern source)
         {
-            long defaultValue = data.index;
-
             if (source.DaysOfWeek != null)
             {
                 foreach (DayOfWeek item in source.DaysOfWeek)
                 {
-                    data.index <<= (int)item;
-                    data.result |= data.index;
-                    data.index = defaultValue;
+                    data.result |= data.index << (int)item;
                 }
             }
 
@@ -58,15 +54,11 @@ namespace WPFSchedule.Helpers.Parsers
 
         private static (long result, long index) AddDates(this (long result, long index) data, StoragePattern source)
         {
-            long defaultValue = data.index;
-
             if (source.Dates != null)
             {
                 foreach (int item in source.Dates)
                 {
-                    data.index <<= item;
-                    data.result |= data.index;
-                    data.index = defaultValue;
+                    data.result |= data.index << (int)item;
                 }
             }
 
@@ -86,17 +78,19 @@ namespace WPFSchedule.Helpers.Parsers
         {
             string stringRepresentationOfStorage = Convert.ToString(storage, 2);
 
+            int subtractionPart = stringRepresentationOfStorage.Length - _daysInWeek;
+
             string daysString = stringRepresentationOfStorage
-                .Substring(stringRepresentationOfStorage.Length - _daysInWeek);
+                .Substring(subtractionPart);
 
             string indexString = stringRepresentationOfStorage
-                .Substring(stringRepresentationOfStorage.Length - _daysInWeek - _possibleMonthIndexOptionsNumber, _possibleMonthIndexOptionsNumber);
+                .Substring(subtractionPart -= _possibleMonthIndexOptionsNumber, _possibleMonthIndexOptionsNumber);
 
             string datesString = stringRepresentationOfStorage
-                .Substring(stringRepresentationOfStorage.Length - _daysInWeek - _possibleMonthIndexOptionsNumber - _maxDaysInMonth - 1, _maxDaysInMonth);
+                .Substring(subtractionPart -= _maxDaysInMonth - 1, _maxDaysInMonth);
 
             string intervalString = stringRepresentationOfStorage
-                .Substring(0, stringRepresentationOfStorage.Length - _daysInWeek - _possibleMonthIndexOptionsNumber - _maxDaysInMonth - 1);
+                .Substring(0, subtractionPart);
 
             return new StoragePattern
             {
