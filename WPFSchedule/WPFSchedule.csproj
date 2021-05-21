@@ -87,6 +87,7 @@
     <Compile Include="Helpers\Queries\ScheduledEventQuery.cs" />
     <Compile Include="Models\Enums\MonthIndex.cs" />
     <Compile Include="Models\Commands\RelayCommand.cs" />
+    <Compile Include="Models\EventTime.cs" />
     <Compile Include="Models\StoragePattern.cs" />
     <Compile Include="ViewModels\AdditionalCreationOptionViewModel.cs" />
     <Compile Include="ViewModels\DataGridViewModel.cs" />
