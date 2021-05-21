@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:l="clr-namespace:WPFSchedule.ViewModels" 
       xmlns:local="clr-namespace:WPFSchedule.Models" 
+         xmlns:global="clr-namespace:System;assembly=mscorlib" 
         mc:Ignorable="d"
         Title="AdditionalCreationOptionView" Height="270" Width="270" MaxHeight="270" MaxWidth="270">
 
@@ -16,7 +17,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/LibToAdditionalCreationOptionView.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <local:StoragePattern  x:Key="storage" />
+            <local:StoragePattern  x:Key="storage"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -49,45 +50,45 @@
                 <Button Style="{StaticResource weekDay}"
                         Name="Sunday"
                         Content="Sun"
-                        Command="{Binding ChangeDateList}"
-                        CommandParameter="{Binding Source={StaticResource storage}}"
-                        Background="Gainsboro"/>
+                        Command="{Binding ChangeSunday}"
+                        CommandParameter="{StaticResource storage}"
+                        Background="{Binding SundayColor}"/>
                 <Button Style="{StaticResource weekDay}"
                         Name="Monday"
                         Content="Mon"
-                        Command="{Binding ChangeDateList}"
-                        CommandParameter="{Binding ElementName=Monday}"
-                        Background="Gainsboro"/>
+                        Command="{Binding ChangeMonday}"
+                        CommandParameter="{StaticResource storage}"
+                        Background="{Binding MondayColor}"/>
                 <Button Style="{StaticResource weekDay}"
                         Name="Tuesday"
                         Content="Tue"
-                        Command="{Binding ChangeDateList}"
-                        CommandParameter="{Binding ElementName=Tuesday}"
-                        Background="Gainsboro"/>
+                        Command="{Binding ChangeTuesday}"
+                        CommandParameter="{StaticResource storage}"
+                        Background="{Binding TuesdayColor}"/>
                 <Button Style="{StaticResource weekDay}"
                         Name="Wednesday"
                         Content="Wed"
-                        Command="{Binding ChangeDateList}"
-                        CommandParameter="{Binding ElementName=Wednesday}"
-                        Background="Gainsboro"/>
+                        Command="{Binding ChangeWednesday}"
+                        CommandParameter="{StaticResource storage}"
+                        Background="{Binding WednesdayColor}"/>
                 <Button Style="{StaticResource weekDay}"
                         Name="Thursday"
                         Content="Thu"
-                        Command="{Binding ChangeDateList}"
-                        CommandParameter="{Binding ElementName=Thursday}"
-                        Background="Gainsboro"/>
+                        Command="{Binding ChangeThursday}"
+                        CommandParameter="{StaticResource storage}"
+                        Background="{Binding ThursdayColor}"/>
                 <Button Style="{StaticResource weekDay}"
                         Name="Friday"
                         Content="Fri"
-                        Command="{Binding ChangeDateList}"
-                        CommandParameter="{Binding ElementName=Friday}"
-                        Background="Gainsboro"/>
+                        Command="{Binding ChangeFriday}"
+                        CommandParameter="{StaticResource storage}"
+                        Background="{Binding FridayColor}"/>
                 <Button Style="{StaticResource weekDay}"
                         Name="Saturday"
                         Content="Sat"
-                        Command="{Binding ChangeDateList}"
-                        CommandParameter="{Binding ElementName=Saturday}"
-                        Background="Gainsboro"/>
+                        Command="{Binding ChangeSaturday}"
+                        CommandParameter="{StaticResource storage}"
+                        Background="{Binding SaturdayColor}"/>
             </StackPanel>
         </StackPanel>
 
@@ -118,7 +119,8 @@
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Center">
             <Button Style="{StaticResource exit}"
                     Content="Save"
-                    Command="{Binding SaveData}"/>
+                    Command="{Binding SaveData}"
+                    CommandParameter="{StaticResource storage}"/>
             <Button Style="{StaticResource exit}"
                     Content="Close"/>
         </StackPanel>

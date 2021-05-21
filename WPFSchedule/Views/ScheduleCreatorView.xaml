@@ -65,7 +65,7 @@
                       Style="{StaticResource repeatInterval}"
                       ItemsSource="{Binding EventOccurrenceList}"
                       SelectedValue ="{Binding DisplayedEventOccurrence, Mode=OneWay}"
-                      SelectedIndex="{Binding ChosedInterval}"/>
+                      SelectedIndex="{Binding ChosedInterval, Mode=OneWayToSource}"/>
 
             <StackPanel Grid.ColumnSpan="3" Grid.Row="2" 
                         Style="{StaticResource mentorPanel}">
