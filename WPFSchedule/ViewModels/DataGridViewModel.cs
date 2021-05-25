@@ -10,6 +10,7 @@ using WPFSchedule.Helpers.Queries;
 using WhatProject.Data.Entities;
 
 using WPFSchedule.Views;
+using System.Windows;
 
 namespace WPFSchedule.ViewModels
 {
@@ -19,6 +20,7 @@ namespace WPFSchedule.ViewModels
         
         private DateTime _selectedDay;
         private ScheduledEventQuery _query;
+        private Visibility frameVisibility;
 
         private RelayCommand _nextWeek;
         private RelayCommand _previousWeek;
@@ -28,7 +30,18 @@ namespace WPFSchedule.ViewModels
         public DataGridViewModel()
         {
             _query = new ScheduledEventQuery();
+            frameVisibility = Visibility.Collapsed;
         }
+
+        public Visibility FrameVisibility
+        {
+            get => frameVisibility;
+            set 
+            {
+                frameVisibility = value;
+                OnPropertyChanged();
+            }
+        } 
 
         public DateTime Sunday => SelectedDay.GetStartAndEndWeek().startWeek;
         public DateTime Monday => Sunday.AddDays(1);
@@ -91,12 +104,7 @@ namespace WPFSchedule.ViewModels
             {
                 return _createSchedule ?? (_createSchedule = new RelayCommand(parameter =>
                 {
-                    ScheduleCreatorView scheduleCreator = new ScheduleCreatorView
-                    {
-                        Owner = App.Current.MainWindow
-                    };
-
-                    scheduleCreator.ShowDialog();
+                    FrameVisibility = Visibility.Visible;
                 }));
             }
         }

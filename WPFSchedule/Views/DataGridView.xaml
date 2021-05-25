@@ -17,12 +17,17 @@
     <Page.Resources>
         <ResourceDictionary Source="../Resources/LibToDataGridView.xaml"/>
     </Page.Resources>
-    
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
+
+        <Frame Grid.RowSpan="2"
+               Source="ScheduleCreatorView.xaml"
+               Panel.ZIndex="1"
+               Visibility="{Binding FrameVisibility}"/>
 
         <Grid Margin="15,10,15,10" Grid.Row="0">
             <Grid.ColumnDefinitions>

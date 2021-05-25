@@ -18,7 +18,7 @@ namespace WPFSchedule.Views
     /// <summary>
     /// Interaction logic for ScheduleCreatorView.xaml
     /// </summary>
-    public partial class ScheduleCreatorView : Window
+    public partial class ScheduleCreatorView : Page
     {
         public ScheduleCreatorView()
         {

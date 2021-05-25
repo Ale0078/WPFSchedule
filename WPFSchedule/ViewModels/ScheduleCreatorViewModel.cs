@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WPFSchedule.Models;
 using WPFSchedule.Views;
 
@@ -26,26 +27,52 @@ namespace WPFSchedule.ViewModels
                 "Don't repeat",
                 "Another ..."
             };
+
+            frameVisibility = Visibility.Collapsed;
+            pageVisibility = Visibility.Visible;
         }
 
         private TimeSpan _startTime;
         private TimeSpan _endTiime;
         private int _chosedInterval;
+        private Visibility frameVisibility;
+        private Visibility pageVisibility;
 
         public DateTime ChosedDate { get; set; } = DateTime.Today;
         public string Caption { get; set; }
+
+        public Visibility FrameVisibility
+        {
+            get => frameVisibility;
+            set
+            {
+                frameVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility PageVisibility
+        {
+            get => pageVisibility;
+            set
+            {
+                pageVisibility = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int ChosedInterval
         {
             get => _chosedInterval;
             set
             {
+                Caption = "123";
+                OnPropertyChanged();
+
                 if (value == 4)
                 {
-                    //_chosedInterval = value;
-                    AdditionalCreationOptionView additionalOption = new AdditionalCreationOptionView();
-
-                    additionalOption.ShowDialog();
+                    PageVisibility = Visibility.Collapsed;
+                    FrameVisibility = Visibility.Visible;
                 }
 
                 _chosedInterval = value;

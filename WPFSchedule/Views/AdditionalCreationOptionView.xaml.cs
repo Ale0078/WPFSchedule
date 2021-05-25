@@ -17,7 +17,7 @@ namespace WPFSchedule.Views
     /// <summary>
     /// Interaction logic for AdditionalCreationOptionView.xaml
     /// </summary>
-    public partial class AdditionalCreationOptionView : Window
+    public partial class AdditionalCreationOptionView : Page
     {
         public AdditionalCreationOptionView()
         {
